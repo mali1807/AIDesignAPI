@@ -8,13 +8,13 @@ using Type = Entities.Concrete.Type;
 
 namespace DataAccess.Concrete.Contexts
 {
-    public class SqlDbContext : IdentityDbContext<User>
+    public class SqlDbContext : IdentityDbContext<User,Role,string>
     {
         public SqlDbContext(DbContextOptions options) : base(options)
         {
         }
 
-        public DbSet<Adress> Adresses { get; set; }
+        public DbSet<Address> Adresses { get; set; }
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<Draft> Drafts { get; set; }
@@ -28,7 +28,8 @@ namespace DataAccess.Concrete.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Adress>(a =>
+           
+            modelBuilder.Entity<Address>(a =>
             {
                 a.ToTable("Adresses").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
@@ -42,13 +43,13 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
+                a.HasOne(p => p.User);
             });
 
             modelBuilder.Entity<Basket>(a =>
             {
                 a.ToTable("Baskets").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
-                a.Property(p => p.UserId).HasColumnName("UserId");
                 a.Property(p => p.TotalPrice).HasColumnName("TotalPrice");
                 a.Property(p => p.TotalProduct).HasColumnName("TotalProduct");
                 a.Property(p => p.IsActive).HasColumnName("IsActive");
@@ -94,14 +95,13 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.TypeId).HasColumnName("TypeId");
                 a.Property(p => p.Size).HasColumnName("Size");
                 a.Property(p => p.IsPrivate).HasColumnName("IsPrivate").HasDefaultValue(false);
-                a.Property(p => p.UserId).HasColumnName("UserId");
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Type).WithMany(p => p.Drafts).HasForeignKey(p => p.TypeId);
                 a.HasOne(p => p.User);
                 a.HasMany(p => p.DraftImages).WithOne(p => p.Draft).HasForeignKey(p => p.DraftId);
-
+                a.HasMany(p => p.Products).WithOne(p => p.Draft).HasForeignKey(p => p.DraftId);
             });
 
             modelBuilder.Entity<File>(a =>
@@ -150,6 +150,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
+                a.HasOne(p => p.Draft).WithMany(p => p.Products).HasForeignKey(p => p.DraftId);
             });
             modelBuilder.Entity<Type>(a =>
             {
@@ -163,12 +164,7 @@ namespace DataAccess.Concrete.Contexts
 
             });
 
-            modelBuilder.Ignore<IdentityUserLogin<string>>();
-            modelBuilder.Ignore<IdentityUserRole<string>>();
-            modelBuilder.Ignore<IdentityUserClaim<string>>();
-            modelBuilder.Ignore<IdentityUserToken<string>>();
-            modelBuilder.Ignore<IdentityUser<string>>();
-            modelBuilder.Ignore<User>();
+            base.OnModelCreating(modelBuilder);
         }
 
             public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

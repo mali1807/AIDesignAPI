@@ -12,7 +12,7 @@ namespace DataAccess
         {
             service.AddDbContext<SqlDbContext>(options => options.UseNpgsql(ConnectionStringConfiguration.ConnectionString));
 
-            service.AddIdentity<User, IdentityRole>(opts =>
+            service.AddIdentity<User, Role>(opts =>
             {
                 opts.Password.RequireDigit = true;
                 opts.Password.RequireLowercase = false;
