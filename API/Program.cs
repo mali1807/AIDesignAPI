@@ -1,10 +1,19 @@
-using DataAccess;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using DataAccess.ServiceRegistrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureContainer<ContainerBuilder>(builder =>
+    {
+        builder.RegisterModule(new AutofacDataAccessModule());
+        //builder.RegisterModule(new AutofacBusinessModule());
+    });
 
 builder.Services.AddDataAccessServices();
 

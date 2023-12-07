@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DataAccess
+namespace DataAccess.ServiceRegistrations
 {
     public static class DataAccessServiceRegistration
     {
@@ -22,6 +22,7 @@ namespace DataAccess
                 opts.User.RequireUniqueEmail = true;
             }
            ).AddEntityFrameworkStores<SqlDbContext>().AddDefaultTokenProviders();
+
 
         }
     }
