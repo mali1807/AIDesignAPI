@@ -16,5 +16,6 @@ namespace Entities.Concrete
         public String? RefreshToken { get; set; }
 
         public DateTime RefreshTokenExpiryTime { get; set; }
+        public ICollection<Concrete.Address> Addresses { get; set; }
     }
 }

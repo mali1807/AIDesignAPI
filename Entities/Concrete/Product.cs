@@ -11,6 +11,7 @@ namespace Entities.Concrete
     {
         public Guid DraftId { get; set; }
         public virtual ICollection<BasketItem> BasketItems { get; set; }
+        public virtual Draft Draft { get; set; }
 
     }
 }

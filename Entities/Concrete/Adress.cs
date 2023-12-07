@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Adress : Entity
+    public class Address : Entity
     {
         public string Title { get; set; }
         public string City { get; set; }
@@ -15,7 +15,7 @@ namespace Entities.Concrete
         public string District { get; set; }
         public string Neighbourhood { get; set; }
         public string AdressDetail { get; set; }
-        public string ZipCode { get; set; }  
-        
+        public string ZipCode { get; set; }
+        public virtual User User { get; set; }
     }
 }
