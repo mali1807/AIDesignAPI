@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.Contexts
         {
         }
 
-        public DbSet<Address> Adresses { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<Draft> Drafts { get; set; }
@@ -31,14 +31,14 @@ namespace DataAccess.Concrete.Contexts
            
             modelBuilder.Entity<Address>(a =>
             {
-                a.ToTable("Adresses").HasKey(k => k.Id);
+                a.ToTable("Addresses").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
                 a.Property(p => p.Title).HasColumnName("Title");
                 a.Property(p => p.City).HasColumnName("City");
                 a.Property(p => p.Country).HasColumnName("Country");
                 a.Property(p => p.District).HasColumnName("District");
                 a.Property(p => p.Neighbourhood).HasColumnName("Neighbourhood");
-                a.Property(p => p.AdressDetail).HasColumnName("AdressDetail");
+                a.Property(p => p.AddressDetail).HasColumnName("AddressDetail");
                 a.Property(p => p.ZipCode).HasColumnName("ZipCode");
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
