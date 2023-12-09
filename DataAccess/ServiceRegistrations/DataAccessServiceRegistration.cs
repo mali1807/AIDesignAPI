@@ -1,4 +1,5 @@
-﻿using DataAccess.Concrete.Contexts;
+﻿using Core.Configurations;
+using DataAccess.Concrete.Contexts;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ namespace DataAccess.ServiceRegistrations
     {
         public static void AddDataAccessServices(this IServiceCollection service)
         {
-            service.AddDbContext<SqlDbContext>(options => options.UseNpgsql(ConnectionStringConfiguration.ConnectionString));
+            service.AddDbContext<SqlDbContext>(options => options.UseNpgsql(OptionsConfiguration.ConnectionString.PostgreSQL));
 
             service.AddIdentity<User, Role>(opts =>
             {
