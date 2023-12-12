@@ -1,23 +1,20 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Configurations.Entities;
-using Microsoft.Extensions.Configuration;
 
 namespace Core.Configurations
 {
     public static class OptionsConfiguration
     {
-        //Burada Configuration Manager class'ı da kullanabiliyor
-        //Todo Crud işlemi yapılınca test edilecek
-        private static IConfiguration Configuration { get; }
-        public static ConnectionStringsOptions ConnectionString
+        public static string ConnectionString
         {
             get
             {
-                return Configuration.GetSection(ConnectionStringsOptions.ConnectionStrings).Get<ConnectionStringsOptions>();
+                //Todo Burada connection'ı appsettings'den çekemedim
+                return "User ID=postgres;Password=123456;Host=localhost;Port=5432;Database=AIDesignDb;";
 
             }
         }

@@ -24,6 +24,7 @@ namespace DataAccess.Concrete.Contexts
         public DbSet<Product> Products { get; set; }
         public DbSet<DraftImage> DraftImages { get; set; }
         public DbSet<Type> Types { get; set; }
+        public DbSet<Test> Tests { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -162,6 +163,16 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasMany(p => p.Drafts).WithOne(p => p.Type).HasForeignKey(p => p.TypeId);
 
+            });
+            modelBuilder.Entity<Test>(a =>
+            {
+                a.ToTable("Tests").HasKey(k => k.Id);
+                a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.Name).HasColumnName("Name");
+                a.Property(p => p.Quantity).HasColumnName("Quantity");
+                a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
+                a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
+                a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
             });
 
             base.OnModelCreating(modelBuilder);

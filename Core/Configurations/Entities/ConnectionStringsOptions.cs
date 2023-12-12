@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.Configurations.Entities
 {
-    public class ConnectionStringsOptions
+    public static class ConnectionStringsOptions
     {
-        public const string ConnectionStrings = "ConnectionStrings";
-
-        public string PostgreSQL { get; set; }
-        public string MongoDB { get; set; }
+        public static string PostgreSQL { get; set; }
+        public static string MongoDB { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Core.Configurations;
+﻿using Autofac.Core;
+using Core.Configurations;
+using Core.IoC;
 using DataAccess.Concrete.Contexts;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Identity;
@@ -7,13 +9,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DataAccess.ServiceRegistrations
 {
-    public static class DataAccessServiceRegistration
+    public class DataAccessModule:ICoreModule
     {
-        public static void AddDataAccessServices(this IServiceCollection service)
+        public void Load(IServiceCollection serviceCollection)
         {
-            service.AddDbContext<SqlDbContext>(options => options.UseNpgsql(OptionsConfiguration.ConnectionString.PostgreSQL));
+            serviceCollection.AddDbContext<SqlDbContext>(options => options.UseNpgsql(OptionsConfiguration.ConnectionString));
 
-            service.AddIdentity<User, Role>(opts =>
+            serviceCollection.AddIdentity<User, Role>(opts =>
             {
                 opts.Password.RequireDigit = true;
                 opts.Password.RequireLowercase = false;
@@ -23,8 +25,6 @@ namespace DataAccess.ServiceRegistrations
                 opts.User.RequireUniqueEmail = true;
             }
            ).AddEntityFrameworkStores<SqlDbContext>().AddDefaultTokenProviders();
-
-
         }
     }
 }

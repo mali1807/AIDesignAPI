@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using DataAccess.Abstract.Repositories;
+using DataAccess.Concrete.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ namespace DataAccess.ServiceRegistrations
     {
         protected override void Load(ContainerBuilder builder)
         {
-            
+            builder.RegisterType<TestRepository>().As<ITestRepository>().SingleInstance();
         }
     }
 }
