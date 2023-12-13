@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Core.Configurations.Entities;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,19 @@ namespace Core.Configurations
 {
     public static class OptionsConfiguration
     {
-        public static string ConnectionString
+        private static ConfigurationManager GetAppSettingsFile()
+        {
+            //Todo refactor edilebilir mi bak
+            ConfigurationManager configurationManager = new();
+            configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../API"));
+            configurationManager.AddJsonFile("appsettings.json");
+            return configurationManager;
+        }
+        public static ConnectionStringsOptions ConnectionString
         {
             get
             {
-                //Todo Burada connection'ı appsettings'den çekemedim
-                return "User ID=postgres;Password=123456;Host=localhost;Port=5432;Database=AIDesignDb;";
-
+                return GetAppSettingsFile().GetSection(ConnectionStringsOptions.ConnectionStrings).Get<ConnectionStringsOptions>();
             }
         }
     }

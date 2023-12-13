@@ -13,7 +13,7 @@ namespace DataAccess.ServiceRegistrations
     {
         public void Load(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddDbContext<SqlDbContext>(options => options.UseNpgsql(OptionsConfiguration.ConnectionString));
+            serviceCollection.AddDbContext<SqlDbContext>(options => options.UseNpgsql(OptionsConfiguration.ConnectionString.PostgreSQL));
 
             serviceCollection.AddIdentity<User, Role>(opts =>
             {
