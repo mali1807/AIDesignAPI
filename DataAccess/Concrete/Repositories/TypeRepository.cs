@@ -7,12 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Type = Entities.Concrete.Type;
 
 namespace DataAccess.Concrete.Repositories
 {
-    public class TestRepository : RepositoryBase<Test, SqlDbContext>, ITestRepository
+    public class TypeRepository : EfRepositoryBase<Type, SqlDbContext>, ITypeRepository
     {
-        public TestRepository(SqlDbContext context) : base(context)
+        public TypeRepository(SqlDbContext context) : base(context)
         {
         }
     }

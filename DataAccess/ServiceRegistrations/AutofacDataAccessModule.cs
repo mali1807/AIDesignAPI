@@ -13,7 +13,7 @@ namespace DataAccess.ServiceRegistrations
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<TestRepository>().As<ITestRepository>().SingleInstance();
+            builder.RegisterType<TypeRepository>().As<ITypeRepository>().SingleInstance();
         }
     }
 }

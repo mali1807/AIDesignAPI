@@ -13,7 +13,7 @@ namespace Business.ServiceRegistrations
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<TestManager>().As<ITestService>().SingleInstance();
+            builder.RegisterType<TypeManager>().As<ITypeService>().InstancePerLifetimeScope();
         }
     }
 }
