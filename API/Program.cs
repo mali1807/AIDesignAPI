@@ -1,4 +1,9 @@
-using DataAccess;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Business.ServiceRegistrations;
+using DataAccess.ServiceRegistrations;
+using Core.ServiceRegistrations;
+using Core.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +11,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDataAccessServices();
+
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureContainer<ContainerBuilder>(builder =>
+    {
+        builder.RegisterModule(new AutofacDataAccessModule());
+        builder.RegisterModule(new AutofacBusinessModule());
+    });
+
+builder.Services.AddServiceRegistrations(new ICoreModule[] {
+    new DataAccessModule(),
+    new BusinessModule(),
+    new CoreModule()
+}) ;
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

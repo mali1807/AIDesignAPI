@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.Contexts
         {
         }
 
-        public DbSet<Address> Adresses { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<Draft> Drafts { get; set; }
@@ -31,17 +31,18 @@ namespace DataAccess.Concrete.Contexts
            
             modelBuilder.Entity<Address>(a =>
             {
-                a.ToTable("Adresses").HasKey(k => k.Id);
+                a.ToTable("Addresses").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
                 a.Property(p => p.Title).HasColumnName("Title");
                 a.Property(p => p.City).HasColumnName("City");
                 a.Property(p => p.Country).HasColumnName("Country");
                 a.Property(p => p.District).HasColumnName("District");
                 a.Property(p => p.Neighbourhood).HasColumnName("Neighbourhood");
-                a.Property(p => p.AdressDetail).HasColumnName("AdressDetail");
+                a.Property(p => p.AddressDetail).HasColumnName("AddressDetail");
                 a.Property(p => p.ZipCode).HasColumnName("ZipCode");
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
+                a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.User);
             });
@@ -55,6 +56,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.IsActive).HasColumnName("IsActive");
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
+                a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasMany(p => p.BasketItems).WithOne(p => p.Basket).HasForeignKey(p => p.BasketId);
                 a.HasOne(p => p.Order).WithOne(p => p.Basket).HasForeignKey<Order>(p => p.BasketId);
@@ -70,6 +72,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.Quantity).HasColumnName("Quantity");
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
+                a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Product).WithMany(p => p.BasketItems).HasForeignKey(p => p.ProductId);
                 a.HasOne(p => p.Basket).WithMany(p => p.BasketItems).HasForeignKey(p => p.BasketId);
@@ -84,6 +87,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.IsCanceled).HasColumnName("IsCanceled").HasDefaultValue(false);
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
+                a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Basket).WithOne(p => p.Order).HasForeignKey<Order>(p => p.BasketId);
             });
@@ -97,6 +101,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.IsPrivate).HasColumnName("IsPrivate").HasDefaultValue(false);
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
+                a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Type).WithMany(p => p.Drafts).HasForeignKey(p => p.TypeId);
                 a.HasOne(p => p.User);
@@ -113,6 +118,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.Storage).HasColumnName("Storage");
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
+                a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Image).WithOne(p => p.File).HasForeignKey<Image>(p => p.FileId);
             });
@@ -126,6 +132,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.IsPrivate).HasColumnName("IsPrivate");
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
+                a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.File).WithOne(p => p.Image).HasForeignKey<Image>(p => p.FileId);
                 a.HasMany(p => p.DraftImages).WithOne(p => p.Image).HasForeignKey(p => p.ImageId);
@@ -138,6 +145,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.DraftId).HasColumnName("DraftId");
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
+                a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Image).WithMany(p => p.DraftImages).HasForeignKey(p => p.ImageId);
                 a.HasOne(p => p.Draft).WithMany(p => p.DraftImages).HasForeignKey(p => p.DraftId);
@@ -149,6 +157,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.DraftId).HasColumnName("DraftId");
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
+                a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Draft).WithMany(p => p.Products).HasForeignKey(p => p.DraftId);
             });
@@ -159,10 +168,12 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.Name).HasColumnName("Name");
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
+                a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasMany(p => p.Drafts).WithOne(p => p.Type).HasForeignKey(p => p.TypeId);
 
             });
+
 
             base.OnModelCreating(modelBuilder);
         }
@@ -181,11 +192,11 @@ namespace DataAccess.Concrete.Contexts
                 {
                     data.Entity.UpdatedDate = DateTime.UtcNow;
                 }
-                //Todo status false yapılcak silinme yerine
-                /*if (data.State == EntityState.Deleted)
+                if (data.State == EntityState.Deleted)
                 {
+                    data.Entity.DeletedDate = DateTime.UtcNow;
                     data.Entity.Status = false;
-                }*/
+                }
             }
             return base.SaveChangesAsync(cancellationToken);
         }
