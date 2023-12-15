@@ -208,6 +208,8 @@ namespace Core.DataAccess.Repositories
         {
             if (entity.DeletedDate.HasValue)
                 return;
+            entity.DeletedDate = DateTime.UtcNow;
+            entity.Status = false;
 
             var navigations = Context
                 .Entry(entity)

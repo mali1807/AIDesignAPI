@@ -45,6 +45,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.User);
+                a.HasQueryFilter(b => b.Status);
             });
 
             modelBuilder.Entity<Basket>(a =>
@@ -61,6 +62,7 @@ namespace DataAccess.Concrete.Contexts
                 a.HasMany(p => p.BasketItems).WithOne(p => p.Basket).HasForeignKey(p => p.BasketId);
                 a.HasOne(p => p.Order).WithOne(p => p.Basket).HasForeignKey<Order>(p => p.BasketId);
                 a.HasOne(p => p.User);
+                a.HasQueryFilter(b => b.Status);
             });
 
             modelBuilder.Entity<BasketItem>(a =>
@@ -76,6 +78,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Product).WithMany(p => p.BasketItems).HasForeignKey(p => p.ProductId);
                 a.HasOne(p => p.Basket).WithMany(p => p.BasketItems).HasForeignKey(p => p.BasketId);
+                a.HasQueryFilter(b => b.Status);
             });
 
             modelBuilder.Entity<Order>(a =>
@@ -90,6 +93,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Basket).WithOne(p => p.Order).HasForeignKey<Order>(p => p.BasketId);
+                a.HasQueryFilter(b => b.Status);
             });
 
             modelBuilder.Entity<Draft>(a =>
@@ -107,6 +111,7 @@ namespace DataAccess.Concrete.Contexts
                 a.HasOne(p => p.User);
                 a.HasMany(p => p.DraftImages).WithOne(p => p.Draft).HasForeignKey(p => p.DraftId);
                 a.HasMany(p => p.Products).WithOne(p => p.Draft).HasForeignKey(p => p.DraftId);
+                a.HasQueryFilter(b => b.Status);
             });
 
             modelBuilder.Entity<File>(a =>
@@ -121,6 +126,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Image).WithOne(p => p.File).HasForeignKey<Image>(p => p.FileId);
+                a.HasQueryFilter(b => b.Status);
             });
 
             modelBuilder.Entity<Image>(a =>
@@ -136,6 +142,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.File).WithOne(p => p.Image).HasForeignKey<Image>(p => p.FileId);
                 a.HasMany(p => p.DraftImages).WithOne(p => p.Image).HasForeignKey(p => p.ImageId);
+                a.HasQueryFilter(b => b.Status);
             });
             modelBuilder.Entity<DraftImage>(a =>
             {
@@ -149,6 +156,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Image).WithMany(p => p.DraftImages).HasForeignKey(p => p.ImageId);
                 a.HasOne(p => p.Draft).WithMany(p => p.DraftImages).HasForeignKey(p => p.DraftId);
+                a.HasQueryFilter(b => b.Status);
             });
             modelBuilder.Entity<Product>(a =>
             {
@@ -160,6 +168,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Draft).WithMany(p => p.Products).HasForeignKey(p => p.DraftId);
+                a.HasQueryFilter(b => b.Status);
             });
             modelBuilder.Entity<Type>(a =>
             {
@@ -171,7 +180,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasMany(p => p.Drafts).WithOne(p => p.Type).HasForeignKey(p => p.TypeId);
-
+                a.HasQueryFilter(b => b.Status);
             });
 
 
@@ -191,11 +200,6 @@ namespace DataAccess.Concrete.Contexts
                 if (data.State == EntityState.Modified)
                 {
                     data.Entity.UpdatedDate = DateTime.UtcNow;
-                }
-                if (data.State == EntityState.Deleted)
-                {
-                    data.Entity.DeletedDate = DateTime.UtcNow;
-                    data.Entity.Status = false;
                 }
             }
             return base.SaveChangesAsync(cancellationToken);

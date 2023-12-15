@@ -30,5 +30,26 @@ namespace API.Controllers
             var result = await _typeService.GetListTypeAsync(request);
             return Ok(result);
         }
+
+        [HttpPatch("{Id}")]
+        public async Task<IActionResult> SoftlyDeleteType([FromRoute] SoftDeleteTypeRequest request)
+        {
+            var result = await _typeService.SoftDeleteTypeAsync(request);
+            return Ok(result);
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> PermanentlyDeleteType([FromRoute] PermanentDeleteTypeRequest request)
+        {
+            var result = await _typeService.PermanentDeleteTypeAsync(request);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateType([FromBody] UpdateTypeRequest request)
+        {
+            var result = await _typeService.UpdateTypeAsync(request);
+            return Ok(result);
+        }
     }
 }
