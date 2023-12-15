@@ -13,7 +13,7 @@ namespace DataAccess.ServiceRegistrations
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<TypeRepository>().As<ITypeRepository>().SingleInstance();
+            builder.RegisterType<TypeRepository>().As<ITypeRepository>().InstancePerLifetimeScope();
         }
     }
 }

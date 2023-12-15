@@ -12,7 +12,7 @@ using Type = Entities.Concrete.Type;
 
 namespace Business.Profiles
 {
-    public class TypeMappingProfile:Profile
+    public class TypeMappingProfile : Profile
     {
         public TypeMappingProfile()
         {
@@ -23,6 +23,16 @@ namespace Business.Profiles
             //GetList
             CreateMap<IPaginate<Type>, Paginate<GetListTypeResponse>>().ReverseMap();
             CreateMap<Type, GetListTypeResponse>().ReverseMap();
+
+            //PermanentDelete
+            CreateMap<PermanentDeleteTypeResponse, Type>().ReverseMap();
+
+            //SoftDelete
+            CreateMap<SoftDeleteTypeResponse, Type>().ReverseMap();
+
+            //Update
+            CreateMap<UpdateTypeRequest, Type>().ForAllMembers(opts=>opts.Condition((src,des,srcMember)=>srcMember !=null));
+            CreateMap<UpdateTypeResponse, Type>().ReverseMap();
         }
     }
 }

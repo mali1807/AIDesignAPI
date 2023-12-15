@@ -13,5 +13,8 @@ namespace Business.Abstract
     {
         Task<CreateTypeResponse> CreateTypeAsync(CreateTypeRequest createTypeRequest);
         Task<IPaginate<GetListTypeResponse>> GetListTypeAsync(PageRequest pageRequest);
+        Task<PermanentDeleteTypeResponse> PermanentDeleteTypeAsync(PermanentDeleteTypeRequest permanentDeleteTypeRequest);
+        Task<SoftDeleteTypeResponse> SoftDeleteTypeAsync(SoftDeleteTypeRequest softDeleteTypeRequest);
+        Task<UpdateTypeResponse> UpdateTypeAsync(UpdateTypeRequest updateTypeRequest);
     }
 }
