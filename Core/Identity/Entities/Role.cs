@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concrete
+namespace Core.Identity.Entities
 {
-    public class Role:IdentityRole
+    public class Role : IdentityRole
     {
     }
 }
