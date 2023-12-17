@@ -1,4 +1,6 @@
 ﻿using Autofac.Core;
+using Business.Abstract;
+using Business.Concrete;
 using Core.Configurations;
 using Core.IoC;
 using DataAccess.Concrete.Contexts;
@@ -15,6 +17,11 @@ namespace DataAccess.ServiceRegistrations
         public void Load(IServiceCollection serviceCollection)
         {
             serviceCollection.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            serviceCollection.AddScoped<IProductService,ProductManager>();
+            serviceCollection.AddScoped<ITypeService,TypeManager>();
+
+
         }
     }
 }
