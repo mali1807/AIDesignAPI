@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(SqlDbContext))]
-    [Migration("20231214055357_init")]
-    partial class init
+    [Migration("20231218092804_init2")]
+    partial class init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -442,6 +442,19 @@ namespace DataAccess.Migrations
                     b.Property<Guid>("DraftId")
                         .HasColumnType("uuid")
                         .HasColumnName("DraftId");
+
+                    b.Property<int>("LikeCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("LikeCount");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Name");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Price");
 
                     b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()

@@ -3,6 +3,7 @@ using System;
 using DataAccess.Concrete.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(SqlDbContext))]
-    partial class SqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231218091142_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -440,19 +442,6 @@ namespace DataAccess.Migrations
                     b.Property<Guid>("DraftId")
                         .HasColumnType("uuid")
                         .HasColumnName("DraftId");
-
-                    b.Property<int>("LikeCount")
-                        .HasColumnType("integer")
-                        .HasColumnName("LikeCount");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Name");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("double precision")
-                        .HasColumnName("Price");
 
                     b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
