@@ -25,5 +25,22 @@ namespace Core.Configurations
                 return GetAppSettingsFile().GetSection(ConnectionStringsOptions.ConnectionStrings).Get<ConnectionStringsOptions>();
             }
         }
+
+        public static GoogleLoginOptions GoogleLogin
+        {
+            get
+            {
+                return GetAppSettingsFile().GetSection(ExternalLoginSettingsOptions.ExternalLoginSettings)
+                    .GetSection(GoogleLoginOptions.Google).Get<GoogleLoginOptions>();
+            }
+        }
+
+        public static TokenOptions Token
+        {
+            get
+            {
+                return GetAppSettingsFile().GetSection(TokenOptions.Token).Get<TokenOptions>();
+            }
+        }
     }
 }
