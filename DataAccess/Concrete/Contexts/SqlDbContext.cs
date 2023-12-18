@@ -164,6 +164,9 @@ namespace DataAccess.Concrete.Contexts
                 a.ToTable("Products").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
                 a.Property(p => p.DraftId).HasColumnName("DraftId");
+                a.Property(p => p.LikeCount).HasColumnName("LikeCount");
+                a.Property(p => p.Name).HasColumnName("Name");
+                a.Property(p => p.Price).HasColumnName("Price");
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
                 a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");

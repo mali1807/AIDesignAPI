@@ -1,4 +1,6 @@
 ﻿using Autofac.Core;
+using Business.Abstract;
+using Business.Concrete;
 using Core.Configurations;
 using Core.IoC;
 using DataAccess.Concrete.Contexts;

@@ -14,6 +14,8 @@ namespace Business.ServiceRegistrations
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<TypeManager>().As<ITypeService>().InstancePerLifetimeScope();
+            builder.RegisterType<DraftManager>().As<IDraftService>().InstancePerLifetimeScope();
+            builder.RegisterType<ProductManager>().As<IProductService>().InstancePerLifetimeScope();
         }
     }
 }

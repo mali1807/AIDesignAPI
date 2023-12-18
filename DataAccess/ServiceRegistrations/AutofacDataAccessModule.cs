@@ -14,6 +14,8 @@ namespace DataAccess.ServiceRegistrations
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<TypeRepository>().As<ITypeRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<DraftRepository>().As<IDraftRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerLifetimeScope();
         }
     }
 }
