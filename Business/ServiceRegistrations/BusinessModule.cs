@@ -17,11 +17,6 @@ namespace DataAccess.ServiceRegistrations
         public void Load(IServiceCollection serviceCollection)
         {
             serviceCollection.AddAutoMapper(Assembly.GetExecutingAssembly());
-
-            serviceCollection.AddScoped<IProductService,ProductManager>();
-            serviceCollection.AddScoped<ITypeService,TypeManager>();
-
-
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Business.DTOs.Requests.Products
     public class CreateProductRequest
     {
         public string DraftId { get; set;}
-        public Draft Draft { get; set;}
+        public int LikeCount { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
     }
 }

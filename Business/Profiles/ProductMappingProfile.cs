@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Type = Entities.Concrete.Type;
 
 namespace Business.Profiles
 {
@@ -16,23 +15,23 @@ namespace Business.Profiles
     {
         public ProductMappingProfile()
         {
-            //CreateType
-            CreateMap<Type, CreateProductRequest>().ReverseMap();
-            CreateMap<Type, CreateProductResponse>().ReverseMap();
+            //Create
+            CreateMap<Product, CreateProductRequest>().ReverseMap();
+            CreateMap<Product, CreateProductResponse>().ReverseMap();
 
             //GetList
-            CreateMap<IPaginate<Type>, Paginate<GetListProductResponse>>().ReverseMap();
-            CreateMap<Type, GetListProductResponse>().ReverseMap();
+            CreateMap<IPaginate<Product>, Paginate<GetListProductResponse>>().ReverseMap();
+            CreateMap<Product, GetListProductResponse>().ReverseMap();
 
             //PermanentDelete
-            CreateMap<PermanentDeleteProductResponse, Type>().ReverseMap();
+            CreateMap<PermanentDeleteProductResponse, Product>().ReverseMap();
 
             //SoftDelete
-            CreateMap<SoftDeleteProductResponse, Type>().ReverseMap();
+            CreateMap<SoftDeleteProductResponse, Product>().ReverseMap();
 
             //Update
-            CreateMap<UpdateProductRequest, Type>().ForAllMembers(opts=>opts.Condition((src,des,srcMember)=>srcMember !=null));
-            CreateMap<UpdateProductResponse, Type>().ReverseMap();
+            CreateMap<UpdateProductRequest, Product>().ForAllMembers(opts=>opts.Condition((src,des,srcMember)=>srcMember !=null));
+            CreateMap<UpdateProductResponse, Product>().ReverseMap();
         }
     }
 }
