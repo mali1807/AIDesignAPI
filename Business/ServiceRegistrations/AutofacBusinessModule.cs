@@ -16,6 +16,13 @@ namespace Business.ServiceRegistrations
             builder.RegisterType<TypeManager>().As<ITypeService>().InstancePerLifetimeScope();
             builder.RegisterType<DraftManager>().As<IDraftService>().InstancePerLifetimeScope();
             builder.RegisterType<ProductManager>().As<IProductService>().InstancePerLifetimeScope();
+            builder.RegisterType<FileManager>().As<IFileService>().InstancePerLifetimeScope();
+            builder.RegisterType<BasketManager>().As<IBasketService>().InstancePerLifetimeScope();
+            builder.RegisterType<BasketItemManager>().As<IBasketItemService>().InstancePerLifetimeScope();
+            builder.RegisterType<DraftImageManager>().As<IDraftImageService>().InstancePerLifetimeScope();
+            builder.RegisterType<OrderManager>().As<IOrderService>().InstancePerLifetimeScope();
+            builder.RegisterType<ImageManager>().As<IImageService>().InstancePerLifetimeScope();
+            builder.RegisterType<AddressManager>().As<IAddressService>().InstancePerLifetimeScope();
         }
     }
 }

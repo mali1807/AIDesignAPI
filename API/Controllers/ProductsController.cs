@@ -1,7 +1,5 @@
-﻿using Autofac.Core;
-using Business.Abstract;
+﻿using Business.Abstract;
 using Business.DTOs.Requests.Products;
-using Business.DTOs.Requests.Types;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 

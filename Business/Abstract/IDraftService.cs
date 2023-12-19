@@ -1,7 +1,5 @@
 ﻿using Business.DTOs.Requests.Drafts;
-using Business.DTOs.Requests.Types;
 using Business.DTOs.Responses.Drafts;
-using Business.DTOs.Responses.Types;
 using Core.DataAccess.Paging;
 using System;
 using System.Collections.Generic;
@@ -15,5 +13,8 @@ namespace Business.Abstract
     {
         Task<CreateDraftResponse> CreateDraftAsync(CreateDraftRequest createDraftRequest);
         Task<IPaginate<GetListDraftResponse>> GetListDraftAsync(PageRequest pageRequest);
+        Task<PermanentDeleteDraftResponse> PermanentDeleteDraftAsync(PermanentDeleteDraftRequest permanentDeleteDraftRequest);
+        Task<SoftDeleteDraftResponse> SoftDeleteDraftAsync(SoftDeleteDraftRequest softDeleteDraftRequest);
+        Task<UpdateDraftResponse> UpdateDraftAsync(UpdateDraftRequest updateDraftRequest);
     }
 }

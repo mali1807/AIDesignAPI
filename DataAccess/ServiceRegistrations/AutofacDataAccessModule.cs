@@ -16,6 +16,13 @@ namespace DataAccess.ServiceRegistrations
             builder.RegisterType<TypeRepository>().As<ITypeRepository>().InstancePerLifetimeScope();
             builder.RegisterType<DraftRepository>().As<IDraftRepository>().InstancePerLifetimeScope();
             builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<FileRepository>().As<IFileRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<DraftImageRepository>().As<IDraftImageRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<AddressRepository>().As<IAddressRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<BasketRepository>().As<IBasketRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<BasketItemRepository>().As<IBasketItemRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<OrderRepository>().As<IOrderRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ImageRepository>().As<IImageRepository>().InstancePerLifetimeScope();
         }
     }
 }
