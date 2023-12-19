@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstract;
 using Business.DTOs.Requests.Drafts;
-using Business.DTOs.Requests.Types;
 using Business.DTOs.Responses.Drafts;
-using Business.DTOs.Responses.Types;
 using Core.DataAccess.Paging;
 using DataAccess.Abstract.Repositories;
 using DataAccess.Concrete.Repositories;
@@ -36,8 +34,30 @@ namespace Business.Concrete
 
         public async Task<IPaginate<GetListDraftResponse>> GetListDraftAsync(PageRequest pageRequest)
         {
-            var types = await _draftRepository.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
-            return _mapper.Map<Paginate<GetListDraftResponse>>(types);
+            var drafts = await _draftRepository.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
+            return _mapper.Map<Paginate<GetListDraftResponse>>(drafts);
+        }
+
+        public async Task<PermanentDeleteDraftResponse> PermanentDeleteDraftAsync(PermanentDeleteDraftRequest permanentDeleteDraftRequest)
+        {
+            var selectedDraft = await _draftRepository.GetAsync(t => t.Id == Guid.Parse(permanentDeleteDraftRequest.Id));
+            var deletedDraft = await _draftRepository.DeleteAsync(selectedDraft, permanent: true);
+            return _mapper.Map<PermanentDeleteDraftResponse>(deletedDraft);
+        }
+
+        public async Task<SoftDeleteDraftResponse> SoftDeleteDraftAsync(SoftDeleteDraftRequest softDeleteDraftRequest)
+        {
+            var selectedDraft = await _draftRepository.GetAsync(t => t.Id == Guid.Parse(softDeleteDraftRequest.Id));
+            var deletedDraft = await _draftRepository.DeleteAsync(selectedDraft, permanent: false);
+            return _mapper.Map<SoftDeleteDraftResponse>(deletedDraft);
+        }
+
+        public async Task<UpdateDraftResponse> UpdateDraftAsync(UpdateDraftRequest updateDraftRequest)
+        {
+            var requestedDraft = await _draftRepository.GetAsync(t => t.Id == Guid.Parse(updateDraftRequest.Id));
+            requestedDraft = _mapper.Map(updateDraftRequest, requestedDraft);
+            var updatedDraft = await _draftRepository.UpdateAsync(requestedDraft);
+            return _mapper.Map<UpdateDraftResponse>(updatedDraft);
         }
     }
 }
