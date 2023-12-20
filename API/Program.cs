@@ -18,6 +18,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     {
         builder.RegisterModule(new AutofacDataAccessModule());
         builder.RegisterModule(new AutofacBusinessModule());
+        builder.RegisterModule(new AutofacCoreModule());
     });
 
 builder.Services.AddServiceRegistrations(new ICoreModule[] {
@@ -41,6 +42,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

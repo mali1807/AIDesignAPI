@@ -31,7 +31,7 @@ namespace Core.Configurations
             get
             {
                 return GetAppSettingsFile().GetSection(ExternalLoginSettingsOptions.ExternalLoginSettings)
-                    .GetSection(GoogleLoginOptions.Google).Get<GoogleLoginOptions>();
+                    .GetSection(GoogleLoginOptions.GoogleLogin).Get<GoogleLoginOptions>();
             }
         }
 
