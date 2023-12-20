@@ -17,7 +17,8 @@ namespace Core.Identity.ExternalAuthentications
         {
             var settings = new GoogleJsonWebSignature.ValidationSettings()
             {
-                Audience = new List<string> { OptionsConfiguration.GoogleLogin.Client_ID }
+                Audience = new List<string> { OptionsConfiguration.GoogleLogin.Client_ID },
+                
             };
 
             var payload = await GoogleJsonWebSignature.ValidateAsync(token, settings);

@@ -17,7 +17,11 @@ namespace DataAccess.ServiceRegistrations
             serviceCollection.AddDbContext<SqlDbContext>(options =>
                 options.UseNpgsql(OptionsConfiguration.ConnectionString.PostgreSQL));
 
-            serviceCollection.AddIdentity<User, Role>().AddEntityFrameworkStores<SqlDbContext>().AddDefaultTokenProviders();
+            serviceCollection.AddIdentity<User, Role>(options =>
+            {
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ ";
+            }).AddEntityFrameworkStores<SqlDbContext>().AddDefaultTokenProviders();
         }
     }
 }
