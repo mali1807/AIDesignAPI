@@ -9,7 +9,7 @@ namespace Business.DTOs.Requests.Baskets
 {
     public class CreateBasketRequest
     {
-        public int TotalPrice { get; set; }
+        public double TotalPrice { get; set; }
         public int TotalProduct { get; set; }
         public bool IsActive { get; set; }
     }

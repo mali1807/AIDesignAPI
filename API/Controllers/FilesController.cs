@@ -28,13 +28,13 @@ namespace API.Controllers
             var result = await _fileService.GetListFileAsync(request);
             return Ok(result); 
         }
-        [HttpPatch("{id}")]
+        [HttpPatch("{Id}")]
         public async Task<IActionResult> SoftlyDeleteFile([FromRoute] SoftDeleteFileRequest request)
         {
             var result =await _fileService.SoftDeleteFileAsync(request);
             return Ok(result);
         }
-        [HttpDelete]
+        [HttpDelete("{Id}")]
         public async Task<IActionResult> PermanentlyDeleteFile([FromRoute] PermanentDeleteFileRequest request)
         {
             var result=await _fileService.PermanentDeleteFileAsync(request);

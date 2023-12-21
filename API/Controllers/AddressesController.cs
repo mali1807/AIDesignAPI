@@ -28,13 +28,13 @@ namespace API.Controllers
             var result = await _addressService.GetListAddressAsync(request);
             return Ok(result); 
         }
-        [HttpPatch("{id}")]
+        [HttpPatch("{Id}")]
         public async Task<IActionResult> SoftlyDeleteAddress([FromRoute] SoftDeleteAddressRequest request)
         {
             var result =await _addressService.SoftDeleteAddressAsync(request);
             return Ok(result);
         }
-        [HttpDelete]
+        [HttpDelete("{Id}")]
         public async Task<IActionResult> PermanentlyDeleteAddress([FromRoute] PermanentDeleteAddressRequest request)
         {
             var result=await _addressService.PermanentDeleteAddressAsync(request);

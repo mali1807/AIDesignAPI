@@ -8,6 +8,9 @@ namespace Business.DTOs.Requests.Files
 {
     public class UpdateFileRequest
     {
-        public string Id { get; set;}
+        public string Id { get; set; }
+        public string? Name { get; set; }
+        public string? Path { get; set; }
+        public string? Storage { get; set; }
     }
 }

@@ -9,5 +9,8 @@ namespace Business.DTOs.Requests.BasketItems
     public class UpdateBasketItemRequest
     {
         public string Id { get; set;}
+        public string? ProductId { get; set; }
+        public string? BasketId { get; set; }
+        public int? Quantity { get; set; }
     }
 }

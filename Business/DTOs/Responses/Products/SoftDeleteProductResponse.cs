@@ -9,5 +9,9 @@ namespace Business.DTOs.Responses.Products
     public class SoftDeleteProductResponse
     {
         public string Id { get; set; }
+        public string DraftId { get; set; }
+        public int LikeCount { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
     }
 }

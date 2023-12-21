@@ -29,13 +29,13 @@ namespace API.Controllers
             var result = await _imageService.GetListImageAsync(request);
             return Ok(result);
         }
-        [HttpPatch("{id}")]
+        [HttpPatch("{Id}")]
         public async Task<IActionResult> SoftlyDeleteImage([FromRoute] SoftDeleteImageRequest request)
         {
             var result = await _imageService.SoftDeleteImageAsync(request);
             return Ok(result);
         }
-        [HttpDelete]
+        [HttpDelete("{Id}")]
         public async Task<IActionResult> PermanentlyDeleteImage([FromRoute] PermanentDeleteImageRequest request)
         {
             var result = await _imageService.PermanentDeleteImageAsync(request);

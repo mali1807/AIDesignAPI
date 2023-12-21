@@ -8,6 +8,7 @@ namespace Business.DTOs.Responses.DraftImages
 {
     public class CreateDraftImageResponse
     {
+        public string Id { get; set; }
         public string ImageId { get; set; }
         public string DraftId { get; set; }
     }

@@ -33,13 +33,13 @@ namespace API.Controllers
             var result = await _draftService.GetListDraftAsync(request);
             return Ok(result);
         }
-        [HttpPatch("{id}")]
+        [HttpPatch("{Id}")]
         public async Task<IActionResult> SoftlyDeleteDraft([FromRoute] SoftDeleteDraftRequest request)
         {
             var result = await _draftService.SoftDeleteDraftAsync(request);
             return Ok(result);
         }
-        [HttpDelete]
+        [HttpDelete("{Id}")]
         public async Task<IActionResult> PermanentlyDeleteDraft([FromRoute] PermanentDeleteDraftRequest request)
         {
             var result = await _draftService.PermanentDeleteDraftAsync(request);
