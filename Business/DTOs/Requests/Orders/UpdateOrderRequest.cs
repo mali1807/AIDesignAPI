@@ -9,5 +9,8 @@ namespace Business.DTOs.Requests.Orders
     public class UpdateOrderRequest
     {
         public string Id { get; set;}
+        public string? BasketId { get; set; }
+        public bool? IsCompleted { get; set; }
+        public bool? IsCanceled { get; set; }
     }
 }

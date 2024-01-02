@@ -9,5 +9,9 @@ namespace Business.DTOs.Responses.Products
     public class PermanentDeleteProductResponse
     {
         public string Id { get; set;}
+        public string DraftId { get; set; }
+        public int LikeCount { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
     }
 }

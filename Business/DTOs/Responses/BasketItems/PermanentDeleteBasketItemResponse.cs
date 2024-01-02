@@ -9,5 +9,8 @@ namespace Business.DTOs.Responses.BasketItems
     public class PermanentDeleteBasketItemResponse
     {
         public string Id { get; set;}
+        public string ProductId { get; set; }
+        public string BasketId { get; set; }
+        public int Quantity { get; set; }
     }
 }

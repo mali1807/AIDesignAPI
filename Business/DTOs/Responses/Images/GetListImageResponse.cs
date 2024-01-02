@@ -9,5 +9,7 @@ namespace Business.DTOs.Responses.Images
     public class GetListImageResponse
     {
         public string Id { get; set; }
+        public bool IsAi { get; set; }
+        public bool IsPrivate { get; set; }
     }
 }

@@ -28,13 +28,13 @@ namespace API.Controllers
             var result = await _orderService.GetListOrderAsync(request);
             return Ok(result); 
         }
-        [HttpPatch("{id}")]
+        [HttpPatch("{Id}")]
         public async Task<IActionResult> SoftlyDeleteOrder([FromRoute] SoftDeleteOrderRequest request)
         {
             var result =await _orderService.SoftDeleteOrderAsync(request);
             return Ok(result);
         }
-        [HttpDelete]
+        [HttpDelete("{Id}")]
         public async Task<IActionResult> PermanentlyDeleteOrder([FromRoute] PermanentDeleteOrderRequest request)
         {
             var result=await _orderService.PermanentDeleteOrderAsync(request);

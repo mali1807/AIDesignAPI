@@ -8,6 +8,7 @@ namespace Business.DTOs.Responses.Orders
 {
     public class CreateOrderResponse
     {
+        public string Id{ get; set; }
         public string BasketId { get; set; }
         public bool IsCompleted { get; set; }
         public bool IsCanceled { get; set; }

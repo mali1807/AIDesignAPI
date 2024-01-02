@@ -9,5 +9,8 @@ namespace Business.DTOs.Responses.Files
     public class SoftDeleteFileResponse
     {
         public string Id { get; set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
+        public string Storage { get; set; }
     }
 }

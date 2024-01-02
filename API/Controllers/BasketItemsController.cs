@@ -28,13 +28,13 @@ namespace API.Controllers
             var result = await _basketItemService.GetListBasketItemAsync(request);
             return Ok(result); 
         }
-        [HttpPatch("{id}")]
+        [HttpPatch("{Id}")]
         public async Task<IActionResult> SoftlyDeleteBasketItem([FromRoute] SoftDeleteBasketItemRequest request)
         {
             var result =await _basketItemService.SoftDeleteBasketItemAsync(request);
             return Ok(result);
         }
-        [HttpDelete]
+        [HttpDelete("{Id}")]
         public async Task<IActionResult> PermanentlyDeleteBasketItem([FromRoute] PermanentDeleteBasketItemRequest request)
         {
             var result=await _basketItemService.PermanentDeleteBasketItemAsync(request);

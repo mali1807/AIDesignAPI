@@ -8,7 +8,8 @@ namespace Business.DTOs.Responses.Baskets
 {
     public class CreateBasketResponse
     {
-        public int TotalPrice { get; set; }
+        public string Id { get; set; }
+        public double TotalPrice { get; set; }
         public int TotalProduct { get; set; }
         public bool IsActive { get; set; }
     }
