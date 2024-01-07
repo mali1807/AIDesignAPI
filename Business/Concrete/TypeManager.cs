@@ -2,7 +2,9 @@
 using Business.Abstract;
 using Business.DTOs.Requests.Types;
 using Business.DTOs.Responses.Types;
+using Business.ValidationRules;
 using Core.DataAccess.Paging;
+using Core.Validation;
 using DataAccess.Abstract.Repositories;
 using Entities.Concrete;
 using System;
@@ -25,6 +27,7 @@ namespace Business.Concrete
             _mapper = mapper;
         }
         //Todo NullCheck eklenecek
+        [ValidationAspect(typeof(CreateTypeValidator))]
         public async Task<CreateTypeResponse> CreateTypeAsync(CreateTypeRequest createTypeRequest)
         {
             var type = _mapper.Map<Type>(createTypeRequest);
@@ -55,6 +58,7 @@ namespace Business.Concrete
             return _mapper.Map<SoftDeleteTypeResponse>(hidedType);
         }
 
+        [ValidationAspect(typeof(UpdateTypeValidator))]
         public async Task<UpdateTypeResponse> UpdateTypeAsync(UpdateTypeRequest updateTypeRequest)
         {
             var requestedType = await _typeRepository.GetAsync(t => t.Id == Guid.Parse(updateTypeRequest.Id));
