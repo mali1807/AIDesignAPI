@@ -34,6 +34,7 @@ namespace DataAccess.Concrete.Contexts
             {
                 a.ToTable("Addresses").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.UserId).HasColumnName("UserId");
                 a.Property(p => p.Title).HasColumnName("Title");
                 a.Property(p => p.City).HasColumnName("City");
                 a.Property(p => p.Country).HasColumnName("Country");
@@ -45,7 +46,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
                 a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
-                a.HasOne(p => p.User);
+                a.HasOne(p => p.User).WithMany().HasForeignKey(b => b.UserId); 
                 a.HasQueryFilter(b => b.Status);
             });
 

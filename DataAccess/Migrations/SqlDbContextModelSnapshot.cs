@@ -185,7 +185,9 @@ namespace DataAccess.Migrations
                         .HasColumnName("UpdatedDate");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("UserId");
 
                     b.Property<string>("ZipCode")
                         .IsRequired()
@@ -224,8 +226,8 @@ namespace DataAccess.Migrations
                         .HasDefaultValue(true)
                         .HasColumnName("Status");
 
-                    b.Property<int>("TotalPrice")
-                        .HasColumnType("integer")
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("double precision")
                         .HasColumnName("TotalPrice");
 
                     b.Property<int>("TotalProduct")
@@ -723,7 +725,9 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Core.Identity.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });

@@ -58,5 +58,11 @@ namespace Business.Concrete
             var updatedAddress = await _addressRepository.UpdateAsync(requestedAddress);
             return _mapper.Map<UpdateAddressResponse>(updatedAddress);
         }
+
+        public async Task<List<GetByUserIdAddressResponse>> GetByUserIdAddressAsync(GetByUserIdAddressRequest getByUserIdAddressRequest)
+        {
+            var requestedAddress = await _addressRepository.GetListAsync(a=>a.User.Id==getByUserIdAddressRequest.UserId);
+            return _mapper.Map<List<GetByUserIdAddressResponse>>(requestedAddress.Items);
+        }
     }
 }

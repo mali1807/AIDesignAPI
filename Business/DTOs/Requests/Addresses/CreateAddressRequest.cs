@@ -9,6 +9,7 @@ namespace Business.DTOs.Requests.Addresses
 {
     public class CreateAddressRequest
     {
+        public string UserId { get; set; }
         public string Title { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
