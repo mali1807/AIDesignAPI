@@ -10,6 +10,7 @@ namespace Entities.Concrete
 {
     public class Basket : Entity
     {
+        public Guid UserId { get; set; }
         public double TotalPrice { get; set; }
         public int TotalProduct { get; set; }
         public bool IsActive { get; set; }
