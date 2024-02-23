@@ -17,7 +17,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LoginWithGoogle(GoogleLoginUserRequest request)
+        public async Task<IActionResult> LoginWithGoogle([FromBody]GoogleLoginUserRequest request)
         {
             var accessToken= await _userService.GoogleLoginAsync(request);
             return Ok(accessToken);
