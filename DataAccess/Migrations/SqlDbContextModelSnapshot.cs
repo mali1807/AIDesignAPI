@@ -171,6 +171,16 @@ namespace DataAccess.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Neighbourhood");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("PhoneNumber");
+
+                    b.Property<string>("Receiver")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Receiver");
+
                     b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")

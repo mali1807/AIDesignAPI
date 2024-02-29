@@ -35,6 +35,8 @@ namespace DataAccess.Concrete.Contexts
                 a.ToTable("Addresses").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
                 a.Property(p => p.UserId).HasColumnName("UserId");
+                a.Property(p => p.Receiver).HasColumnName("Receiver");
+                a.Property(p => p.PhoneNumber).HasColumnName("PhoneNumber");
                 a.Property(p => p.Title).HasColumnName("Title");
                 a.Property(p => p.City).HasColumnName("City");
                 a.Property(p => p.Country).HasColumnName("Country");

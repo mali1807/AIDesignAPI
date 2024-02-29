@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Business.Abstract;
 using Business.Concrete;
+using Business.Helpers.Baskets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace Business.ServiceRegistrations
             builder.RegisterType<OrderManager>().As<IOrderService>().InstancePerLifetimeScope();
             builder.RegisterType<ImageManager>().As<IImageService>().InstancePerLifetimeScope();
             builder.RegisterType<AddressManager>().As<IAddressService>().InstancePerLifetimeScope();
+
+            builder.RegisterType<BasketHelper>().As<IBasketHelper>().InstancePerLifetimeScope();
         }
     }
 }
