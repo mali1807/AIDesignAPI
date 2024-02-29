@@ -10,6 +10,7 @@ namespace Entities.Concrete
 {
     public class Draft : Entity
     {
+        public Guid UserId { get; set; }
         public Guid TypeId { get; set; }
         public string Size { get; set; }
         public string Color { get; set; }
