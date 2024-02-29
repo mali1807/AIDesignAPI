@@ -1,6 +1,11 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
+using Castle.DynamicProxy;
+using Core.Interceptors;
+using System.Reflection;
+using Module = Autofac.Module;
 using Business.Helpers.Baskets;
 using System;
 using System.Collections.Generic;
@@ -10,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Business.ServiceRegistrations
 {
-    public class AutofacBusinessModule:Module
+    public class AutofacBusinessModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -25,7 +30,17 @@ namespace Business.ServiceRegistrations
             builder.RegisterType<ImageManager>().As<IImageService>().InstancePerLifetimeScope();
             builder.RegisterType<AddressManager>().As<IAddressService>().InstancePerLifetimeScope();
 
+
+            var assembly = Assembly.GetExecutingAssembly();
+
+            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
+                .EnableInterfaceInterceptors(new ProxyGenerationOptions()
+                {
+                    Selector = new AspectInterceptorSelector()
+                }).SingleInstance();
+
             builder.RegisterType<BasketHelper>().As<IBasketHelper>().InstancePerLifetimeScope();
+
         }
     }
 }
