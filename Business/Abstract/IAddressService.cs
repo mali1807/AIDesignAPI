@@ -16,5 +16,6 @@ namespace Business.Abstract
         Task<PermanentDeleteAddressResponse> PermanentDeleteAddressAsync(PermanentDeleteAddressRequest permanentDeleteAddressRequest);
         Task<SoftDeleteAddressResponse> SoftDeleteAddressAsync(SoftDeleteAddressRequest softDeleteAddressRequest);
         Task<UpdateAddressResponse> UpdateAddressAsync(UpdateAddressRequest updateAddressRequest);
+        Task<List<GetByUserIdAddressResponse>> GetByUserIdAddressAsync(GetByUserIdAddressRequest getByUserIdAddressRequest);
     }
 }

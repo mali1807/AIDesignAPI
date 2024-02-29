@@ -9,7 +9,7 @@ using Type = Entities.Concrete.Type;
 
 namespace DataAccess.Concrete.Contexts
 {
-    public class SqlDbContext : IdentityDbContext<User,Role,string>
+    public class SqlDbContext : IdentityDbContext<User,Role,Guid>
     {
         public SqlDbContext(DbContextOptions options) : base(options)
         {
@@ -34,6 +34,9 @@ namespace DataAccess.Concrete.Contexts
             {
                 a.ToTable("Addresses").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.UserId).HasColumnName("UserId");
+                a.Property(p => p.Receiver).HasColumnName("Receiver");
+                a.Property(p => p.PhoneNumber).HasColumnName("PhoneNumber");
                 a.Property(p => p.Title).HasColumnName("Title");
                 a.Property(p => p.City).HasColumnName("City");
                 a.Property(p => p.Country).HasColumnName("Country");
@@ -45,7 +48,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
                 a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
-                a.HasOne(p => p.User);
+                a.HasOne(p => p.User).WithMany().HasForeignKey(b => b.UserId); 
                 a.HasQueryFilter(b => b.Status);
             });
 
@@ -53,6 +56,7 @@ namespace DataAccess.Concrete.Contexts
             {
                 a.ToTable("Baskets").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.UserId).HasColumnName("UserId");
                 a.Property(p => p.TotalPrice).HasColumnName("TotalPrice");
                 a.Property(p => p.TotalProduct).HasColumnName("TotalProduct");
                 a.Property(p => p.IsActive).HasColumnName("IsActive");
@@ -62,7 +66,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasMany(p => p.BasketItems).WithOne(p => p.Basket).HasForeignKey(p => p.BasketId);
                 a.HasOne(p => p.Order).WithOne(p => p.Basket).HasForeignKey<Order>(p => p.BasketId);
-                a.HasOne(p => p.User);
+                a.HasOne(p => p.User).WithMany().HasForeignKey(b => b.UserId);
                 a.HasQueryFilter(b => b.Status);
             });
 
@@ -101,6 +105,7 @@ namespace DataAccess.Concrete.Contexts
             {
                 a.ToTable("Drafts").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.UserId).HasColumnName("UserId");
                 a.Property(p => p.TypeId).HasColumnName("TypeId");
                 a.Property(p => p.Size).HasColumnName("Size");
                 a.Property(p => p.IsPrivate).HasColumnName("IsPrivate").HasDefaultValue(false);
@@ -109,7 +114,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Type).WithMany(p => p.Drafts).HasForeignKey(p => p.TypeId);
-                a.HasOne(p => p.User);
+                a.HasOne(p => p.User).WithMany().HasForeignKey(b => b.UserId);
                 a.HasMany(p => p.DraftImages).WithOne(p => p.Draft).HasForeignKey(p => p.DraftId);
                 a.HasMany(p => p.Products).WithOne(p => p.Draft).HasForeignKey(p => p.DraftId);
                 a.HasQueryFilter(b => b.Status);

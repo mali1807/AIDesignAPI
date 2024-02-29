@@ -28,6 +28,14 @@ namespace API.Controllers
             var result = await _addressService.GetListAddressAsync(request);
             return Ok(result); 
         }
+
+        [HttpGet("{UserId}")]
+        public async Task<IActionResult> GetListAddressesByUserId([FromRoute] GetByUserIdAddressRequest request)
+        {
+            var result = await _addressService.GetByUserIdAddressAsync(request);
+            return Ok(result);
+        }
+
         [HttpPatch("{Id}")]
         public async Task<IActionResult> SoftlyDeleteAddress([FromRoute] SoftDeleteAddressRequest request)
         {

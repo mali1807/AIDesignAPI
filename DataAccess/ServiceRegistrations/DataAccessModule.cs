@@ -19,8 +19,7 @@ namespace DataAccess.ServiceRegistrations
 
             serviceCollection.AddIdentity<User, Role>(options =>
             {
-                options.User.AllowedUserNameCharacters =
-                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ ";
+                options.User.AllowedUserNameCharacters = String.Empty;
             }).AddEntityFrameworkStores<SqlDbContext>().AddDefaultTokenProviders();
         }
     }

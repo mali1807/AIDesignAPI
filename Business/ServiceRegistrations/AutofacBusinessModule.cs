@@ -6,6 +6,12 @@ using Castle.DynamicProxy;
 using Core.Interceptors;
 using System.Reflection;
 using Module = Autofac.Module;
+using Business.Helpers.Baskets;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Business.ServiceRegistrations
 {
@@ -24,6 +30,7 @@ namespace Business.ServiceRegistrations
             builder.RegisterType<ImageManager>().As<IImageService>().InstancePerLifetimeScope();
             builder.RegisterType<AddressManager>().As<IAddressService>().InstancePerLifetimeScope();
 
+
             var assembly = Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
@@ -31,6 +38,9 @@ namespace Business.ServiceRegistrations
                 {
                     Selector = new AspectInterceptorSelector()
                 }).SingleInstance();
+
+            builder.RegisterType<BasketHelper>().As<IBasketHelper>().InstancePerLifetimeScope();
+
         }
     }
 }

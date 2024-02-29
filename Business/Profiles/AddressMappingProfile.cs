@@ -31,6 +31,9 @@ namespace Business.Profiles
             //Update
             CreateMap<UpdateAddressRequest, Address>().ForAllMembers(opts => opts.Condition((src, des, srcMember) => srcMember != null));
             CreateMap<UpdateAddressResponse, Address>().ReverseMap();
+
+            //GetByUserId
+            CreateMap<Address, GetByUserIdAddressResponse>().ReverseMap();
         }
     }
 }

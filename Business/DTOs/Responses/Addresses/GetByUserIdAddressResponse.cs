@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.DTOs.Responses.Addresses
 {
-    public class CreateAddressResponse
+    public class GetByUserIdAddressResponse
     {
         public string Id { get; set; }
         public string UserId { get; set; }
