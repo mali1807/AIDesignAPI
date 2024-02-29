@@ -2,6 +2,7 @@
 using Business.Abstract;
 using Business.DTOs.Requests.Orders;
 using Business.DTOs.Responses.Orders;
+using Business.Helpers.Baskets;
 using Core.DataAccess.Paging;
 using DataAccess.Abstract.Repositories;
 using Entities.Concrete;
@@ -17,17 +18,18 @@ namespace Business.Concrete
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
+        private readonly IBasketHelper _basketHelper;
 
-        public OrderManager(IOrderRepository orderRepository, IMapper mapper)
+        public OrderManager(IOrderRepository orderRepository, IMapper mapper, IBasketHelper basketHelper)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
+            _basketHelper = basketHelper;
         }
 
         public async Task<CreateOrderResponse> CreateOrderAsync(CreateOrderRequest createOrderRequest)
         {
-             var order = _mapper.Map<Order>(createOrderRequest);
-            var createdOrder = await _orderRepository.AddAsync(order);
+            Order createdOrder= await _basketHelper.CloseBasketAsync(createOrderRequest.BasketId);
             return _mapper.Map<CreateOrderResponse>(createdOrder);
         }
 

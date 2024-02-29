@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Identity.Abstract
+namespace Business.Abstract
 {
     public interface IUserService
     {

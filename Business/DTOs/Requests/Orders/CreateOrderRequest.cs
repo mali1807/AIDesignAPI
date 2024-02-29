@@ -10,7 +10,5 @@ namespace Business.DTOs.Requests.Orders
     public class CreateOrderRequest
     {
         public string BasketId { get; set; }
-        public bool IsCompleted { get; set; }
-        public bool IsCanceled { get; set; }
     }
 }
