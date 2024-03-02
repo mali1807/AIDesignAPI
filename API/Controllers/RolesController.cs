@@ -20,20 +20,14 @@ namespace API.Controllers
         public async Task<IActionResult> CreateRole([FromBody] CreateRoleRequest request)
         {
             var result = await _roleService.CreateRoleAsync(request);
-            if (result)
-                return Ok("Role created successfully.");
-            else
-                return BadRequest("Failed to create role.");
+            return Ok(result);
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteRole([FromBody] DeleteRoleRequest request)
         {
             var result = await _roleService.DeleteRoleAsync(request);
-            if (result)
-                return Ok("Role deleted successfully.");
-            else
-                return BadRequest("Failed to delete role.");
+            return Ok(result);
         }
 
 
@@ -41,10 +35,7 @@ namespace API.Controllers
         public async Task<IActionResult> ChangeUserRole([FromBody] UpdateRoleRequest request)
         {
             var result = await _roleService.ChangeUserRoleAsync(request);
-            if (result)
-                return Ok("User role changed successfully.");
-            else
-                return BadRequest("Failed to change user role.");
+            return Ok(result);
         }
     }
 }

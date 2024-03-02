@@ -10,7 +10,5 @@ namespace Business.DTOs.Responses.Roles
     {
         public string UserId { get; set; }
         public string RoleName { get; set; }
-        public bool IsCompleted { get; set; }
-        public bool IsCanceled { get; set; }
     }
 }

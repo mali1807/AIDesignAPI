@@ -9,7 +9,6 @@ namespace Business.DTOs.Requests.Roles
     public class CreateRoleRequest
     {
         
-        public string roleName{ get; set; }
-        public string normalizedName { get; set; }
+        public string Name{ get; set; }
     }
 }

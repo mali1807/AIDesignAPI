@@ -1,4 +1,5 @@
 ﻿using Business.DTOs.Requests.Roles;
+using Business.DTOs.Responses.Roles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace Business.Abstract
 {
     public interface IRoleService 
     {
-            Task<bool> CreateRoleAsync(CreateRoleRequest request);
-            Task<bool> DeleteRoleAsync(DeleteRoleRequest request);
-            Task<bool> ChangeUserRoleAsync(UpdateRoleRequest request);
+            Task<CreateRoleResponse> CreateRoleAsync(CreateRoleRequest request);
+            Task<DeleteRoleResponse> DeleteRoleAsync(DeleteRoleRequest request);
+            Task<UpdateRoleResponse> ChangeUserRoleAsync(UpdateRoleRequest request);
        
     }
 }
