@@ -40,7 +40,7 @@ namespace API.Controllers
         [HttpPut]
         public async Task<IActionResult> ChangeUserRole([FromBody] UpdateRoleRequest request)
         {
-            var result = await _roleService.ChangeUserRoleAsync(request.UserId, request.RoleName);
+            var result = await _roleService.ChangeUserRoleAsync(request);
             if (result)
                 return Ok("User role changed successfully.");
             else

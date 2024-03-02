@@ -43,9 +43,9 @@ namespace Business.Concrete
             return result.Succeeded;
         }
 
-        public async Task<bool> ChangeUserRoleAsync(string userId, string newRoleName)
+        public async Task<bool> ChangeUserRoleAsync(UpdateRoleRequest request)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(request.UserId);
             if (user == null)
                 return false;
 
@@ -54,7 +54,7 @@ namespace Business.Concrete
             if (!result.Succeeded)
                 return false;
 
-            result = await _userManager.AddToRoleAsync(user, newRoleName);
+            result = await _userManager.AddToRoleAsync(user,request.RoleName);
             return result.Succeeded;
         }
     }

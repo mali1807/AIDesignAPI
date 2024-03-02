@@ -11,7 +11,7 @@ namespace Business.Abstract
     {
             Task<bool> CreateRoleAsync(CreateRoleRequest request);
             Task<bool> DeleteRoleAsync(DeleteRoleRequest request);
-            Task<bool> ChangeUserRoleAsync(string userId, string newRoleName);
+            Task<bool> ChangeUserRoleAsync(UpdateRoleRequest request);
        
     }
 }
