@@ -10,7 +10,7 @@ namespace Business.Helpers.Baskets
 {
     public interface IBasketHelper
     {
-        Task<Order> CloseBasketAsync(Basket basket);
+        Task<Order> CloseBasketAsync(string basketId);
         Task CreateNewActiveBasket(User user);
         Task CalculateAddedBasketItemAsync(BasketItem basketItem);
         Task CalculateRemovedBasketItemAsync(BasketItem basketItem);

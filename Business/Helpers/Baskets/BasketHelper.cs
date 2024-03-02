@@ -24,8 +24,9 @@ namespace Business.Helpers.Baskets
             _basketItemRepository = basketItemRepository;
         }
 
-        public async Task<Order> CloseBasketAsync(Basket basket)
+        public async Task<Order> CloseBasketAsync(string basketId)
         {
+            Basket basket = await _basketRepository.GetAsync(b => b.Id == Guid.Parse(basketId));
             Order order = await CreateOrderAsync(basket);
             await CloseActiveBasketAsync(basket);
             await CreateNewActiveBasket(basket);

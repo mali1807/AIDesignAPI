@@ -30,6 +30,8 @@ namespace Business.ServiceRegistrations
             builder.RegisterType<ImageManager>().As<IImageService>().InstancePerLifetimeScope();
             builder.RegisterType<AddressManager>().As<IAddressService>().InstancePerLifetimeScope();
             builder.RegisterType<RoleManager>().As<IRoleService>().InstancePerLifetimeScope();
+            builder.RegisterType<UserManager>().As<IUserService>().InstancePerLifetimeScope();
+
 
 
             var assembly = Assembly.GetExecutingAssembly();
