@@ -1,7 +1,11 @@
-﻿using Business.Abstract;
+﻿using AutoMapper;
+using Business.Abstract;
+using Business.DTOs.Requests.Images;
 using Business.DTOs.Requests.Roles;
+using Business.DTOs.Responses.Images;
 using Business.DTOs.Responses.Roles;
 using Core.Identity.Entities;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -16,11 +20,12 @@ namespace Business.Concrete
     {
         private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
-
-        public RoleManager(UserManager<User> userManager, RoleManager<Role> roleManager)
+        private readonly IMapper _mapper;
+        public RoleManager(UserManager<User> userManager, RoleManager<Role> roleManager, IMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _mapper = mapper;
         }
 
         public async Task<CreateRoleResponse> CreateRoleAsync(CreateRoleRequest request)
@@ -29,9 +34,10 @@ namespace Business.Concrete
             {
                 Name = request.Name
             };
-            var result = await _roleManager.CreateAsync(role);
-            //Todo do mapping
-            return result.Succeeded ? new() { Name = role.Name } : throw new Exception("Role wasn't added");
+            var creatrole = _mapper.Map<Role>(request);
+            var result = await _roleManager.CreateAsync(creatrole);
+            return _mapper.Map<CreateRoleResponse>(result);
+            //return result.Succeeded ? new() { Name = role.Name } : throw new Exception("Role wasn't added");
         }
 
         public async Task<DeleteRoleResponse> DeleteRoleAsync(DeleteRoleRequest request)
@@ -40,9 +46,10 @@ namespace Business.Concrete
             if (role == null)
                 throw new Exception("Role wasn't finded");
 
-            var result = await _roleManager.DeleteAsync(role);
-            //Todo do mapping
-            return result.Succeeded ? new() { Name = role.Name } : throw new Exception("Role wasn't deleted");
+            var deleterole = _mapper.Map<Role>(request);
+            var result = await _roleManager.DeleteAsync(deleterole);
+            return _mapper.Map<DeleteRoleResponse>(result);
+            //return result.Succeeded ? new() { Name = role.Name } : throw new Exception("Role wasn't deleted");
         }
 
         public async Task<UpdateRoleResponse> ChangeUserRoleAsync(UpdateRoleRequest request)
