@@ -4,6 +4,7 @@ using Business.DTOs.Requests.Images;
 using Business.DTOs.Requests.Roles;
 using Business.DTOs.Responses.Images;
 using Business.DTOs.Responses.Roles;
+using Core.Aspects.Autofac.Security;
 using Core.Identity.Entities;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Identity;
@@ -28,6 +29,7 @@ namespace Business.Concrete
             _mapper = mapper;
         }
 
+        [SecuredOperation("admin")]
         public async Task<CreateRoleResponse> CreateRoleAsync(CreateRoleRequest request)
         {
             var creatRole = _mapper.Map<Role>(request);
