@@ -8,7 +8,6 @@ namespace Business.DTOs.Requests.Roles
 {
     public class DeleteRoleRequest
     {
-        //Todo Not name, it should role id
-        public string Name { get; set; }
+        public string Id { get; set; }
     }
 }

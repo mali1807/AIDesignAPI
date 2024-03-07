@@ -30,26 +30,17 @@ namespace Business.Concrete
 
         public async Task<CreateRoleResponse> CreateRoleAsync(CreateRoleRequest request)
         {
-            Role role = new()
-            {
-                Name = request.Name
-            };
-            var creatrole = _mapper.Map<Role>(request);
-            var result = await _roleManager.CreateAsync(creatrole);
+            var creatRole = _mapper.Map<Role>(request);
+            var result = await _roleManager.CreateAsync(creatRole);
             return _mapper.Map<CreateRoleResponse>(result);
-            //return result.Succeeded ? new() { Name = role.Name } : throw new Exception("Role wasn't added");
         }
 
         public async Task<DeleteRoleResponse> DeleteRoleAsync(DeleteRoleRequest request)
         {
-            var role = await _roleManager.FindByNameAsync(request.Name);
-            if (role == null)
-                throw new Exception("Role wasn't finded");
-
-            var deleterole = _mapper.Map<Role>(request);
-            var result = await _roleManager.DeleteAsync(deleterole);
+            var role = await _roleManager.FindByIdAsync(request.Id);
+            if (role == null) throw new Exception("Role wasn't finded");
+            var result = await _roleManager.DeleteAsync(role);
             return _mapper.Map<DeleteRoleResponse>(result);
-            //return result.Succeeded ? new() { Name = role.Name } : throw new Exception("Role wasn't deleted");
         }
 
         public async Task<UpdateRoleResponse> ChangeUserRoleAsync(UpdateRoleRequest request)
@@ -65,7 +56,7 @@ namespace Business.Concrete
 
             result = await _userManager.AddToRoleAsync(user, request.RoleName);
             //Todo fix this for multiple roles
-            return result.Succeeded ? new() { RoleName = request.RoleName,UserId=user.Id.ToString() } : throw new Exception("Role wasn't added to user");
+            return result.Succeeded ? new() { RoleName = request.RoleName, UserId = user.Id.ToString() } : throw new Exception("Role wasn't added to user");
         }
     }
 }

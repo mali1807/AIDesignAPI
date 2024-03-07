@@ -3,6 +3,7 @@ using Business.DTOs.Requests.Roles;
 using Business.DTOs.Responses.Roles;
 using Core.Identity.Entities;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +17,16 @@ namespace Business.Profiles
         public RoleMappingProfile() 
         { 
         CreateMap<Role, CreateRoleRequest>().ReverseMap();
-        CreateMap<Role, CreateRoleResponse>().ReverseMap();
-        //delete
-        CreateMap<DeleteRoleResponse, Role>().ReverseMap();
+        CreateMap<IdentityResult, CreateRoleResponse>().ForMember(res=>res.IsSucceeded,opt=>opt.MapFrom(r=>r.Succeeded))
+                .ReverseMap();
+
+            //delete
+            CreateMap<IdentityResult, DeleteRoleResponse>().ForMember(res => res.IsSucceeded, opt => opt.MapFrom(r => r.Succeeded))
+                .ReverseMap();
 
         //Update
         CreateMap<UpdateRoleRequest, Role>().ForAllMembers(opts => opts.Condition((src, des, srcMember) => srcMember != null));
-        CreateMap<UpdateRoleResponse, Role>().ReverseMap();
+        CreateMap<UpdateRoleResponse, IdentityResult>().ReverseMap();
         }
        
     }

@@ -8,7 +8,6 @@ namespace Business.DTOs.Responses.Roles
 {
     public class CreateRoleResponse
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public string IsSucceeded { get; set; }
     }
 }
