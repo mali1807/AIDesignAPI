@@ -314,7 +314,6 @@ namespace DataAccess.Migrations
                         .HasColumnName("Id");
 
                     b.Property<string>("Color")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedDate")
@@ -325,14 +324,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<bool>("IsPrivate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsPrivate");
-
                     b.Property<string>("Size")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("Size");
 
@@ -342,7 +334,12 @@ namespace DataAccess.Migrations
                         .HasDefaultValue(true)
                         .HasColumnName("Status");
 
-                    b.Property<Guid>("TypeId")
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Title");
+
+                    b.Property<Guid?>("TypeId")
                         .HasColumnType("uuid")
                         .HasColumnName("TypeId");
 
@@ -563,8 +560,16 @@ namespace DataAccess.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("DraftId");
 
+                    b.Property<bool>("IsPrivate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsPrivate");
+
                     b.Property<int>("LikeCount")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasDefaultValue(0)
                         .HasColumnName("LikeCount");
 
                     b.Property<string>("Name")

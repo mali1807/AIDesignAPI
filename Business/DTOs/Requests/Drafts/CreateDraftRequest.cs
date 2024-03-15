@@ -8,9 +8,7 @@ namespace Business.DTOs.Requests.Drafts
 {
     public class CreateDraftRequest
     {
-        public string TypeId { get; set; }
-        public string Size { get; set; }
-        public string Color { get; set; }
-        public bool IsPrivate { get; set; }
+        public string UserId { get; set; }
+        public string Title { get; set; }
     }
 }
