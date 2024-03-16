@@ -112,6 +112,7 @@ namespace DataAccess.Concrete.Contexts
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
                 a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
+                a.Property(p => p.IsCompleted).HasColumnName("IsCompleted").HasDefaultValue(false);
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Type).WithMany(p => p.Drafts).HasForeignKey(p => p.TypeId);
                 a.HasOne(p => p.User).WithMany().HasForeignKey(b => b.UserId);

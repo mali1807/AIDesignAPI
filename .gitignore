@@ -366,3 +366,4 @@ FodyWeavers.xsd
 /DataAccess/Migrations/
 /API/appsettings.json
 /API/appsettings.json
+/DataAccess/Migrations/SqlDbContextModelSnapshot.cs

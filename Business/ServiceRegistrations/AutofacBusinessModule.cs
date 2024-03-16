@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Business.Helpers.Products;
 
 namespace Business.ServiceRegistrations
 {
@@ -41,6 +42,7 @@ namespace Business.ServiceRegistrations
                 }).SingleInstance();
 
             builder.RegisterType<BasketHelper>().As<IBasketHelper>().InstancePerLifetimeScope();
+            builder.RegisterType<ProductHelper>().As<IProductHelper>().InstancePerLifetimeScope();
 
         }
     }
