@@ -42,5 +42,13 @@ namespace Core.Configurations
                 return GetAppSettingsFile().GetSection(TokenOptions.Token).Get<TokenOptions>();
             }
         }
+
+        public static StoragesOptions Storages
+        {
+            get
+            {
+                return GetAppSettingsFile().GetSection(StoragesOptions.Storages).Get<StoragesOptions>();
+            }
+        }
     }
 }
