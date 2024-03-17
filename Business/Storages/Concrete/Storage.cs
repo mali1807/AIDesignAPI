@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using File = Entities.Concrete.File;
-
-namespace Business.Storages.Concrete
+﻿namespace Business.Storages.Concrete
 {
     public class Storage
     {
