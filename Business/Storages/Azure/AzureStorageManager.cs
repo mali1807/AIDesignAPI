@@ -39,7 +39,8 @@ namespace Business.Storages.Azure
         {
             _blobContainerClient = _blobServiceClient.GetBlobContainerClient(containerName);
             await _blobContainerClient.CreateIfNotExistsAsync();
-            await _blobContainerClient.SetAccessPolicyAsync(PublicAccessType.BlobContainer);
+            //todo PublicAccessType.BlobContainer hata veriyordu none'a çektim
+            await _blobContainerClient.SetAccessPolicyAsync(PublicAccessType.None);
 
             List<File> datas = new();
             foreach (IFormFile file in formFiles)

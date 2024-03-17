@@ -11,6 +11,6 @@ namespace Core.Configurations.Entities
         public const string Storages = "Storages";
         public string Azure { get; set; }
         public string AWS { get; set; }
-        public int Google { get; set; }
+        public string Google { get; set; }
     }
 }

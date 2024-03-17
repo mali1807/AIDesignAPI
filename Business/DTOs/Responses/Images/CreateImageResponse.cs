@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Business.DTOs.Responses.Images
 {
-    public class CreateImageResponse
+    public class UploadImageResponse
     {
         public string Id { get; set; }
+        public string FileId { get; set; }
         public bool IsAi { get; set; }
         public bool IsPrivate { get; set; }
     }

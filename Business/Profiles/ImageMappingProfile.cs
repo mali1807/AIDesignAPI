@@ -16,8 +16,8 @@ namespace Business.Profiles
         public ImageMappingProfile()
         {
 
-            CreateMap<Image, CreateImageRequest>().ReverseMap();
-            CreateMap<Image, CreateImageResponse>().ReverseMap();
+            CreateMap<Image, UploadImageRequest>().ReverseMap();
+            CreateMap<Image, UploadImageResponse>().ReverseMap();
 
             //GetList
             CreateMap<IPaginate<Image>, Paginate<GetListImageResponse>>().ReverseMap();
