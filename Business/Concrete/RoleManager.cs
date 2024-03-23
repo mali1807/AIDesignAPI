@@ -29,7 +29,7 @@ namespace Business.Concrete
             _mapper = mapper;
         }
 
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         public async Task<CreateRoleResponse> CreateRoleAsync(CreateRoleRequest request)
         {
             var creatRole = _mapper.Map<Role>(request);

@@ -18,8 +18,6 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.Wi
     .AllowAnyHeader()
     .AllowAnyMethod()));
 
-
-
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>(builder =>
     {
