@@ -8,7 +8,7 @@ namespace Business.DTOs.Responses.Roles
 {
     public class UpdateRoleResponse
     {
-        public string UserId { get; set; }
-        public string RoleName { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     }
 }

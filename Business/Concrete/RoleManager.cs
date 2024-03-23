@@ -2,8 +2,10 @@
 using Business.Abstract;
 using Business.DTOs.Requests.Images;
 using Business.DTOs.Requests.Roles;
+using Business.DTOs.Requests.Types;
 using Business.DTOs.Responses.Images;
 using Business.DTOs.Responses.Roles;
+using Business.DTOs.Responses.Types;
 using Core.Aspects.Autofac.Security;
 using Core.Identity.Entities;
 using Entities.Concrete;
@@ -47,18 +49,10 @@ namespace Business.Concrete
 
         public async Task<UpdateRoleResponse> ChangeUserRoleAsync(UpdateRoleRequest request)
         {
-            var user = await _userManager.FindByIdAsync(request.UserId);
-            if (user == null)
-                throw new Exception("User wasn't finded");
-
-            var currentRoles = await _userManager.GetRolesAsync(user);
-            var result = await _userManager.RemoveFromRolesAsync(user, currentRoles);
-            if (!result.Succeeded)
-                throw new Exception("Roles wasn't deleted");
-
-            result = await _userManager.AddToRoleAsync(user, request.RoleName);
-            //Todo fix this for multiple roles
-            return result.Succeeded ? new() { RoleName = request.RoleName, UserId = user.Id.ToString() } : throw new Exception("Role wasn't added to user");
+            var requestedType = await _roleManager.FindByIdAsync(request.Id);
+            requestedType = _mapper.Map(request, requestedType);
+            await _roleManager.UpdateAsync(requestedType);
+            return _mapper.Map<UpdateRoleResponse>(requestedType);
         }
     }
 }

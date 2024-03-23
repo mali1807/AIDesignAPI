@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Business.DTOs.Requests.Roles;
+using Business.DTOs.Requests.Types;
 using Business.DTOs.Responses.Roles;
+using Business.DTOs.Responses.Types;
 using Core.Identity.Entities;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Identity;
@@ -24,9 +26,9 @@ namespace Business.Profiles
             CreateMap<IdentityResult, DeleteRoleResponse>().ForMember(res => res.IsSucceeded, opt => opt.MapFrom(r => r.Succeeded))
                 .ReverseMap();
 
-        //Update
-        CreateMap<UpdateRoleRequest, Role>().ForAllMembers(opts => opts.Condition((src, des, srcMember) => srcMember != null));
-        CreateMap<UpdateRoleResponse, IdentityResult>().ReverseMap();
+            //Update
+            CreateMap<UpdateRoleRequest, Role>().ForAllMembers(opts => opts.Condition((src, des, srcMember) => srcMember != null));
+            CreateMap<UpdateRoleResponse, Role>().ReverseMap();
         }
        
     }
