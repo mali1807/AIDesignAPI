@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.DTOs.Responses.Files
 {
-    public class CreateFileResponse
+    public class UploadFileResponse
     {
         public string Id { get; set; }
         public string Name { get; set; }
