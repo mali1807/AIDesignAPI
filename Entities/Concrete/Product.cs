@@ -13,6 +13,7 @@ namespace Entities.Concrete
         public int LikeCount  { get; set; }
         public string Name  { get; set; }
         public double Price  { get; set; }
+        public bool IsPrivate { get; set; }
         public virtual ICollection<BasketItem> BasketItems { get; set; }
         public virtual Draft Draft { get; set; }
 
