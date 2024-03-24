@@ -11,7 +11,7 @@ namespace Business.Abstract
 {
     public interface IFileService
     {
-        Task<CreateFileResponse> CreateFileAsync(CreateFileRequest createFileRequest);
+        Task<List<UploadFileResponse>> UploadFileAsync(UploadFileRequest uploadFileRequest);
         Task<IPaginate<GetListFileResponse>> GetListFileAsync(PageRequest pageRequest);
         Task<PermanentDeleteFileResponse> PermanentDeleteFileAsync(PermanentDeleteFileRequest permanentDeleteFileRequest);
         Task<SoftDeleteFileResponse> SoftDeleteFileAsync(SoftDeleteFileRequest softDeleteFileRequest);

@@ -2,6 +2,7 @@
 using Business.Abstract;
 using Business.DTOs.Requests.Images;
 using Business.DTOs.Responses.Images;
+using Business.Storages.Abstract;
 using Core.DataAccess.Paging;
 using DataAccess.Abstract.Repositories;
 using DataAccess.Concrete.Repositories;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using File = Entities.Concrete.File;
 
 namespace Business.Concrete
 {
@@ -18,18 +20,31 @@ namespace Business.Concrete
     {
         private readonly IImageRepository _imageRepository;
         private readonly IMapper _mapper;
+        private readonly IStorageService _storageService;
+        private readonly IFileRepository _fileRepository;
 
-        public ImageManager(IImageRepository imageRepository, IMapper mapper)
+        public ImageManager(IImageRepository imageRepository, IMapper mapper, IStorageService storageService, IFileRepository fileRepository)
         {
             _imageRepository = imageRepository;
             _mapper = mapper;
+            _storageService = storageService;
+            _fileRepository = fileRepository;
         }
 
-        public async Task<CreateImageResponse> CreateImageAsync(CreateImageRequest createImageRequest)
+        public async Task<List<UploadImageResponse>> UploadImageAsync(UploadImageRequest uploadImageRequest)
         {
-            var image = _mapper.Map<Image>(createImageRequest);
-            var createdImage = await _imageRepository.AddAsync(image);
-            return _mapper.Map<CreateImageResponse>(createdImage);
+            var files = await _storageService.UploadAsync("images", uploadImageRequest.Files);
+            List<UploadImageResponse> response = new();
+            foreach (var file in files)
+            {
+                file.Storage = _storageService.StorageType;
+                File addedFile = await _fileRepository.AddAsync(file);
+
+                Image image = new() { FileId = file.Id, IsAi = uploadImageRequest.IsAi, IsPrivate = uploadImageRequest.IsPrivate };
+                Image addedImage = await _imageRepository.AddAsync(image);
+                response.Add(_mapper.Map<UploadImageResponse>(addedImage));
+            }
+            return response;
         }
 
         public async Task<IPaginate<GetListImageResponse>> GetListImageAsync(PageRequest pageRequest)

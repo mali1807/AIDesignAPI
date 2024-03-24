@@ -12,7 +12,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Business.Helpers.Products;
+
+using Business.Storages.Concrete;
+using Business.Storages.Abstract;
+using Business.Storages.Azure;
+
 
 namespace Business.ServiceRegistrations
 {
@@ -43,6 +49,10 @@ namespace Business.ServiceRegistrations
 
             builder.RegisterType<BasketHelper>().As<IBasketHelper>().InstancePerLifetimeScope();
             builder.RegisterType<ProductHelper>().As<IProductHelper>().InstancePerLifetimeScope();
+
+
+            builder.RegisterType<StorageManager>().As<IStorageService>().InstancePerLifetimeScope();
+            builder.RegisterType<AzureStorageManager>().As<IStorage>().InstancePerLifetimeScope();
 
         }
     }

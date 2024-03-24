@@ -17,8 +17,8 @@ namespace Business.Profiles
         public FileMappingProfile()
         {
             
-            CreateMap<File, CreateFileRequest>().ReverseMap();
-            CreateMap<File, CreateFileResponse>().ReverseMap();
+            CreateMap<File, UploadFileRequest>().ReverseMap();
+            CreateMap<File, UploadFileResponse>().ReverseMap();
 
             //GetList
             CreateMap<IPaginate<File>, Paginate<GetListFileResponse>>().ReverseMap();

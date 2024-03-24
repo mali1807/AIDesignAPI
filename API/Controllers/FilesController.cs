@@ -17,9 +17,10 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFile([FromBody] CreateFileRequest request)
+        public async Task<IActionResult> AddFile([FromQuery] UploadFileRequest request)
         {
-            var result=await _fileService.CreateFileAsync(request);
+            request.Files = Request.Form.Files;
+            var result=await _fileService.UploadFileAsync(request);
             return Ok(result);
         }
         [HttpGet]
