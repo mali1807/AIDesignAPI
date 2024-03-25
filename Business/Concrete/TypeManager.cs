@@ -3,6 +3,7 @@ using Business.Abstract;
 using Business.DTOs.Requests.Types;
 using Business.DTOs.Responses.Types;
 using Business.ValidationRules;
+using Core.Aspects.Autofac.Security;
 using Core.DataAccess.Paging;
 using Core.Validation;
 using DataAccess.Abstract.Repositories;
@@ -27,7 +28,8 @@ namespace Business.Concrete
             _mapper = mapper;
         }
         //Todo NullCheck eklenecek
-        [ValidationAspect(typeof(CreateTypeValidator))]
+        //[ValidationAspect(typeof(CreateTypeValidator))]
+        [SecuredOperation("admin")]
         public async Task<CreateTypeResponse> CreateTypeAsync(CreateTypeRequest createTypeRequest)
         {
             var type = _mapper.Map<Type>(createTypeRequest);

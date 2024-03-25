@@ -20,7 +20,10 @@ namespace DataAccess.ServiceRegistrations
             serviceCollection.AddIdentity<User, Role>(options =>
             {
                 options.User.AllowedUserNameCharacters = String.Empty;
-            }).AddEntityFrameworkStores<SqlDbContext>().AddDefaultTokenProviders();
+            })
+                .AddRoleManager<RoleManager<Role>>()
+                .AddEntityFrameworkStores<SqlDbContext>().AddDefaultTokenProviders();
+
         }
     }
 }
