@@ -13,5 +13,6 @@ namespace Business.DTOs.Requests.Products
         public int? LikeCount { get; set; }
         public string? Name { get; set; }
         public double? Price { get; set; }
+        public bool? IsPrivate { get; set; }
     }
 }

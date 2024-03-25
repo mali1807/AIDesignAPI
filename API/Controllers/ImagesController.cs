@@ -18,9 +18,10 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddImage([FromBody] CreateImageRequest request)
+        public async Task<IActionResult> UploadImage([FromQuery] UploadImageRequest request)
         {
-            var result = await _imageService.CreateImageAsync(request);
+            request.Files = Request.Form.Files;
+            var result = await _imageService.UploadImageAsync(request);
             return Ok(result);
         }
         [HttpGet]
@@ -44,6 +45,7 @@ namespace API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateImage([FromBody] UpdateImageRequest request)
         {
+            //todo parametreler null olarak geldiğinde mapper null'ı false yapıyor, bilgilerin tam olarak gönderilmesi lazım
             var result = await _imageService.UpdateImageAsync(request);
             return Ok(result);
         }

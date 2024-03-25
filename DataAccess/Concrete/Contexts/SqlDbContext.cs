@@ -105,13 +105,14 @@ namespace DataAccess.Concrete.Contexts
             {
                 a.ToTable("Drafts").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.Title).HasColumnName("Title");
                 a.Property(p => p.UserId).HasColumnName("UserId");
-                a.Property(p => p.TypeId).HasColumnName("TypeId");
-                a.Property(p => p.Size).HasColumnName("Size");
-                a.Property(p => p.IsPrivate).HasColumnName("IsPrivate").HasDefaultValue(false);
+                a.Property(p => p.TypeId).HasColumnName("TypeId").IsRequired(false);
+                a.Property(p => p.Size).HasColumnName("Size").IsRequired(false);
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
                 a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
+                a.Property(p => p.IsCompleted).HasColumnName("IsCompleted").HasDefaultValue(false);
                 a.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
                 a.HasOne(p => p.Type).WithMany(p => p.Drafts).HasForeignKey(p => p.TypeId);
                 a.HasOne(p => p.User).WithMany().HasForeignKey(b => b.UserId);
@@ -169,9 +170,10 @@ namespace DataAccess.Concrete.Contexts
                 a.ToTable("Products").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
                 a.Property(p => p.DraftId).HasColumnName("DraftId");
-                a.Property(p => p.LikeCount).HasColumnName("LikeCount");
+                a.Property(p => p.LikeCount).HasColumnName("LikeCount").HasDefaultValue(0);
                 a.Property(p => p.Name).HasColumnName("Name");
                 a.Property(p => p.Price).HasColumnName("Price");
+                a.Property(p => p.IsPrivate).HasColumnName("IsPrivate").HasDefaultValue(false);
                 a.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
                 a.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
                 a.Property(p => p.DeletedDate).HasColumnName("DeletedDate");

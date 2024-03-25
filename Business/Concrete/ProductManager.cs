@@ -2,6 +2,7 @@
 using Business.Abstract;
 using Business.DTOs.Requests.Products;
 using Business.DTOs.Responses.Products;
+using Business.Helpers.Products;
 using Core.DataAccess.Paging;
 using DataAccess.Abstract.Repositories;
 using System;
@@ -18,15 +19,20 @@ namespace Business.Concrete
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
+        private readonly IProductHelper _productHelper;
 
-        public ProductManager(IProductRepository productRepository, IMapper mapper)
+        public ProductManager(IProductRepository productRepository, IMapper mapper, IProductHelper productHelper)
         {
             _productRepository = productRepository;
             _mapper = mapper;
+            _productHelper = productHelper;
         }
 
         public async Task<CreateProductResponse> CreateProductAsync(CreateProductRequest createProductRequest)
         {
+            var idOfDuplicateDraft=await _productHelper.DuplicateDraft(createProductRequest.DraftId);
+            createProductRequest.DraftId = idOfDuplicateDraft;
+
             var product = _mapper.Map<Product>(createProductRequest);
             var createdProduct= await _productRepository.AddAsync(product);
             return _mapper.Map<CreateProductResponse>(createdProduct);  

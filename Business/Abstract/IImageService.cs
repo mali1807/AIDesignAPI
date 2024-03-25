@@ -11,7 +11,7 @@ namespace Business.Abstract
 {
     public interface IImageService
     {
-        Task<CreateImageResponse> CreateImageAsync(CreateImageRequest createImageRequest);
+        Task<List<UploadImageResponse>> UploadImageAsync(UploadImageRequest uploadImageRequest);
         Task<IPaginate<GetListImageResponse>> GetListImageAsync(PageRequest pageRequest);
         Task<PermanentDeleteImageResponse> PermanentDeleteImageAsync(PermanentDeleteImageRequest permanentDeleteImageRequest);
         Task<SoftDeleteImageResponse> SoftDeleteImageAsync(SoftDeleteImageRequest softDeleteImageRequest);
